@@ -6,7 +6,7 @@ Open source Java 15 Clash of Clans server for version 13!
 ## How to start
 #### Requirements:
 - [JDK 15](https://www.oracle.com/ru/java/technologies/javase-jdk15-downloads.html)
-- [Patched APK](https://drive.google.com/file/d/1N6VtHPGB7PN1v-t9HLULKMjJdm63kIpz/view?usp=sharing)
+- [Patched APK](https://drive.google.com/file/d/19YtdWWQ7iY_Y_FY8V-YBQAFs_vZJW8Qs/view?usp=sharing)
 
 Next step you need to compile the server OR use prebuilt jar.
 
