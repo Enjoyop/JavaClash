@@ -10,8 +10,20 @@ public class Player {
 
     public static HashMap<Integer, Player> players = new HashMap<>(); //data storage
 
-    public int id, gems = 100000, gold = 500, elixir = 500, darkelixir = 500;
-    public int trophies, lvl = 8, exp;
+    public int id;
+    public inf gems = 100000;
+    public int gold = 500,
+    public int elixir = 500;
+    public int darkelixir = 500;
+    public int builderGold = 1000000000;
+    public int builderElixir = 1000000000;
+    public int medals = 2500;
+
+    public int trophies = 750;
+    public int builderTrophies = 1000;
+
+    public int lvl = 8;
+    public int exp = 50;
     public int allianceID;
     public String token = "Token", name = "Guest";
     public LogicJsonObject home;
@@ -44,52 +56,64 @@ public class Player {
             return;
         }
 
-        try (DataInputStream d = new DataInputStream(new FileInputStream("players.dat"))){
-            int count = d.readInt();
+        try (DataInputStream dataInputStream = new DataInputStream(new FileInputStream("players.dat"))) {
+            int count = dataInputStream.readInt();
 
             for (int i = 0; i < count; i++) {
-                Player pl = new Player(d.readInt());
-                pl.name = d.readUTF();
-                pl.token = d.readUTF();
-                pl.nameSet = d.readInt();
-                pl.lvl = d.readInt();
-                pl.exp = d.readInt();
-                pl.trophies = d.readInt();
-                pl.gems = d.readInt();
-                pl.gold = d.readInt();
-                pl.elixir = d.readInt();
-                pl.darkelixir = d.readInt();
-                pl.allianceID = d.readInt();
-                pl.role = d.readInt();
+                Player player = new Player(dataInputStream.readInt());
 
-                d.skip(16L);
-                players.put(Integer.valueOf(pl.id), pl);
+                player.name = dataInputStream.readUTF();
+                player.token = dataInputStream.readUTF();
+                player.nameSet = dataInputStream.readInt();
+                player.lvl = dataInputStream.readInt();
+                player.exp = dataInputStream.readInt();
+                player.trophies = dataInputStream.readInt();
+                player.builderTrophies = dataInputStream.readInt();
+                player.gems = dataInputStream.readInt();
+                player.gold = dataInputStream.readInt();
+                player.elixir = dataInputStream.readInt();
+                player.darkelixir = dataInputStream.readInt();
+                player.builderGold = dataInputStream.readInt();
+                player.builderElixir = dataInputStream.readInt();
+                player.medals = dataInputStream.readInt();
+                player.allianceID = dataInputStream.readInt();
+                player.role = dataInputStream.readInt();
+
+                dataInputStream.skip(16L);
+                players.put(Integer.valueOf(player.id), player);
             }
             Debugger.print("Loaded data file with " + count + " players!");
         } catch (IOException e) {throw new RuntimeException(e);}
     }
 
     public static void saveData() {
-        try (DataOutputStream d = new DataOutputStream(new FileOutputStream("players.dat"))) {
-            d.writeInt(players.size());
-            for (Player pl : players.values()) {
-                d.writeInt(pl.id);
-                d.writeUTF(pl.name);
-                d.writeUTF(pl.token);
-                d.writeInt(pl.nameSet);
-                d.writeInt(pl.lvl);
-                d.writeInt(pl.exp);
-                d.writeInt(pl.trophies);
-                d.writeInt(pl.gems);
-                d.writeInt(pl.gold);
-                d.writeInt(pl.elixir);
-                d.writeInt(pl.darkelixir);
-                d.writeInt(pl.allianceID);
-                d.writeInt(pl.role);
+        try (DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("players.dat"))) {
+            dataOutputStream.writeInt(players.size());
+            for (Player pleyer : players.values()) {
+                dataOutputStream.writeInt(player.id);
+                dataOutputStream.writeUTF(player.name);
+                dataOutputStream.writeUTF(player.token);
+                dataOutputStream.writeInt(player.nameSet);
+                dataOutputStream.writeInt(player.lvl);
+                dataOutputStream.writeInt(player.exp);
+                dataOutputStream.writeInt(player.trophies);
+                dataOutputStream.writeInt(player.builderTrophies);
+                dataOutputStream.writeInt(player.gems);
+                dataOutputStream.writeInt(player.gold);
+                dataOutputStream.writeInt(player.elixir);
+                dataOutputStream.writeInt(player.darkelixir);
+                dataOutputStream.writeInt(player.builderGold);
+                dataOutputStream.writeInt(player.builderElixir);
+                dataOutputStream.writeInt(player.medals);
+                
+                dataOutputStream.writeInt(pl.allianceID);
+                dataOutputStream.writeInt(pl.role);
 
-                d.write(new byte[16]);
+                dataOutputStream.write(new byte[16]);
             }
-        } catch (IOException e) {throw new RuntimeException(e);}
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     public void LogicClientHome(Writer writer) {
@@ -173,7 +197,7 @@ public class Player {
         writer.writeString(null);
 
         writer.writeInt(this.lvl); //level
-        writer.writeInt(0); //exp
+        writer.writeInt(this.exp); //exp
 
         writer.writeInt(this.gems); //gems
         writer.writeInt(this.gems); //free gems
@@ -182,7 +206,7 @@ public class Player {
         writer.writeInt(60);
 
         writer.writeInt(this.trophies);
-        writer.writeInt(0);
+        writer.writeInt(this.builderTrophies);
 
         writer.writeInt(0);
         writer.writeInt(0);
@@ -223,7 +247,7 @@ public class Player {
         writer.writeInt(3000008);
         writer.writeInt(2000000000);
 
-        writer.writeInt(6); //resources array
+        writer.writeInt(7); //resources array
         {
             writer.writeInt(3000000);
             writer.writeInt(1000000);
@@ -234,9 +258,11 @@ public class Player {
             writer.writeInt(3000003);
             writer.writeInt(this.darkelixir);
             writer.writeInt(3000007);
-            writer.writeInt(100000);
+            writer.writeInt(this.builderGold);
             writer.writeInt(3000008);
-            writer.writeInt(100000);
+            writer.writeInt(this.builderElixir);
+            writer.writeInt(3000009);
+            writer.writeInt(this.medals);
         }
 
         writer.writeInt(3); //home troops
@@ -308,7 +334,7 @@ public class Player {
 
         writer.writeInt(94); //NPC completed levels
         for (int i = 0; i < 94; i++){
-            writer.writeInt(21000000 + i);
+            writer.writeInt(17000000 + i);
             writer.writeInt(3);
         }
 
