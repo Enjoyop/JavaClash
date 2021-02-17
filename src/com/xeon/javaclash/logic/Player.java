@@ -11,7 +11,7 @@ public class Player {
     public static HashMap<Integer, Player> players = new HashMap<>(); //data storage
 
     public int id;
-    public inf gems = 100000;
+    public int gems = 100000;
     public int gold = 500,
     public int elixir = 500;
     public int darkelixir = 500;
