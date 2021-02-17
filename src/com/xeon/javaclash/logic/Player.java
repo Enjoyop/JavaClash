@@ -265,15 +265,26 @@ public class Player {
             writer.writeInt(this.medals);
         }
 
-        writer.writeInt(3); //home troops
+        writer.writeInt(2); //home troops
         {
             writer.writeInt(4000005); //balloon
-            writer.writeInt(10);
-            writer.writeInt(4000006); //wizard
-            writer.writeInt(5);
+            writer.writeInt(8);
             writer.writeInt(4000059); //electro dragon
+            writer.writeInt(8);
+        }
+
+        writer.writeInt(4); //home spells
+        {
+            writer.writeInt(26000002); //haste
+            writer.writeInt(3);
+            writer.writeInt(26000005); //freeze
+            writer.writeInt(3);
+            writer.writeInt(26000009); //posion
+            writer.writeInt(1);
+            writer.writeInt(26000011); //speed up
             writer.writeInt(1);
         }
+        
 
         writer.writeInt(0);
 
