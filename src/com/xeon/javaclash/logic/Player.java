@@ -284,11 +284,42 @@ public class Player {
             writer.writeInt(26000011); //speed up
             writer.writeInt(1);
         }
-        
 
-        writer.writeInt(0);
-
-        writer.writeInt(0);
+        writer.writeInt(16); // home troop levels
+        {
+            writer.writeInt(4000000); //barbarian
+            writer.writeInt(7);
+            writer.writeInt(4000001); //archer
+            writer.writeInt(7);
+            writer.writeInt(4000002); //goblin
+            writer.writeInt(6);
+            writer.writeInt(4000003); //giant
+            writer.writeInt(8);
+            writer.writeInt(4000004); //wall brraker
+            writer.writeInt(8);
+            writer.writeInt(4000005); //balloon
+            writer.writeInt(8);
+            writer.writeInt(4000006); //wizard
+            writer.writeInt(8);
+            writer.writeInt(4000007); //healer
+            writer.writeInt(5);
+            writer.writeInt(4000008); //dragon
+            writer.writeInt(7);
+            writer.writeInt(4000009); //pekka
+            writer.writeInt(7);
+            writer.writeInt(4000010); //minion
+            writer.writeInt(7);
+            writer.writeInt(4000011); //boar rider
+            writer.writeInt(9);
+            writer.writeInt(4000012); //valkriye
+            writer.writeInt(6);
+            writer.writeInt(4000013); //golem
+            writer.writeInt(8);
+            writer.writeInt(4000015); //witch
+            writer.writeInt(4);
+            writer.writeInt(4000017);
+            writer.writeInt(4);
+        }
 
         writer.writeInt(0);
 
@@ -310,23 +341,15 @@ public class Player {
             writer.writeInt(19);
         }
 
-        writer.writeInt(0); //hero health
-
-        writer.writeInt(0);
-
-        writer.writeInt(0);
+        writer.writeInt(5); //hero health
+        for (int i = 28000000; i < 28000005; i++) {
+            writer.writeInt(i);
+            writer.writeInt(0);
+        }
 
         writer.writeInt(5); //hero states
-        {
-            writer.writeInt(28000000);
-            writer.writeInt(3);
-            writer.writeInt(28000001);
-            writer.writeInt(3);
-            writer.writeInt(28000002);
-            writer.writeInt(3);
-            writer.writeInt(28000003);
-            writer.writeInt(3);
-            writer.writeInt(28000004);
+        for (int i = 28000000; i < 28000005; i++) {
+            writer.writeInt(i);
             writer.writeInt(3);
         }
 
@@ -340,12 +363,11 @@ public class Player {
         }
 
         writer.writeInt(0);
-
         writer.writeInt(0);
 
         writer.writeInt(94); //NPC completed levels
-        for (int i = 0; i < 94; i++){
-            writer.writeInt(17000000 + i);
+        for (int i = 17000000; i < 17000094; i++) {
+            writer.writeInt(i);
             writer.writeInt(3);
         }
 
