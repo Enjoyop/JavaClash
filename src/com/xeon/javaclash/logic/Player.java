@@ -275,17 +275,17 @@ public class Player {
 
         writer.writeInt(4); //home spells
         {
-            writer.writeInt(26000002); //haste
+            writer.writeInt(26000002); //rage
             writer.writeInt(3);
             writer.writeInt(26000005); //freeze
             writer.writeInt(3);
-            writer.writeInt(26000009); //posion
+            writer.writeInt(26000009); //poison
             writer.writeInt(1);
             writer.writeInt(26000011); //speed up
             writer.writeInt(1);
         }
 
-        writer.writeInt(16); // home troop levels
+        writer.writeInt(22); // home troop levels
         {
             writer.writeInt(4000000); //barbarian
             writer.writeInt(7);
@@ -317,11 +317,47 @@ public class Player {
             writer.writeInt(8);
             writer.writeInt(4000015); //witch
             writer.writeInt(4);
-            writer.writeInt(4000017);
+            writer.writeInt(4000017); //lava hound
             writer.writeInt(4);
+            writer.writeInt(4000022); //bowler
+            writer.writeInt(4);
+            writer.writeInt(4000023); //baby dragon
+            writer.writeInt(5);
+            writer.writeInt(4000024); //miner
+            writer.writeInt(6);
+            writer.writeInt(4000053); //yeti
+            writer.writeInt(2);
+            writer.writeInt(4000058); //ice golem
+            writer.writeInt(4);
+            writer.writeInt(4000059); //electro dragon
+            writer.writeInt(3);
         }
 
-        writer.writeInt(0);
+        writer.writeInt(11); spell levels
+        {
+            writer.writeInt(26000000); //lightning
+            writer.writeInt(6);
+            writer.writeInt(26000001); //healing
+            writer.writeInt(7);
+            writer.writeInt(26000002); //rage
+            writer.writeInt(5);
+            writer.writeInt(26000003); //jump
+            writer.writeInt(3);
+            writer.writeInt(26000005); //freeze
+            writer.writeInt(6);
+            writer.writeInt(26000009); //poison
+            writer.writeInt(5);
+            writer.writeInt(26000010); //earthquake
+            writer.writeInt(4);
+            writer.writeInt(26000011); //speed up
+            writer.writeInt(4);
+            writer.writeInt(26000016); //clone
+            writer.writeInt(4);
+            writer.writeInt(26000017); //skeleton
+            writer.writeInt(6);
+            writer.writeInt(26000027); //bat
+            writer.writeInt(6);
+        }
 
         writer.writeInt(5); //hero levels
         {
@@ -489,7 +525,6 @@ public class Player {
         writer.writeInt(0);
 
         writer.writeByte(0);
-
 
     }
 }
