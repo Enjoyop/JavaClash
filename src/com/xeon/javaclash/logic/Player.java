@@ -19,8 +19,12 @@ public class Player {
     public int builderElixir = 1000000000;
     public int medals = 2500;
 
-    public int trophies = 750;
+    public int trophies = 1250;
     public int builderTrophies = 1000;
+    public int attackWins = 100;
+    public int attackLoses = 25;
+    public int defenseWins = 50;
+    public int defenseLoses = 12;
 
     public int lvl = 8;
     public int exp = 50;
@@ -83,7 +87,9 @@ public class Player {
                 players.put(Integer.valueOf(player.id), player);
             }
             Debugger.print("Loaded data file with " + count + " players!");
-        } catch (IOException e) {throw new RuntimeException(e);}
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     public static void saveData() {
@@ -106,8 +112,8 @@ public class Player {
                 dataOutputStream.writeInt(player.builderElixir);
                 dataOutputStream.writeInt(player.medals);
                 
-                dataOutputStream.writeInt(pl.allianceID);
-                dataOutputStream.writeInt(pl.role);
+                dataOutputStream.writeInt(player.allianceID);
+                dataOutputStream.writeInt(player.role);
 
                 dataOutputStream.write(new byte[16]);
             }
@@ -208,11 +214,11 @@ public class Player {
         writer.writeInt(this.trophies);
         writer.writeInt(this.builderTrophies);
 
-        writer.writeInt(0);
-        writer.writeInt(0);
+        writer.writeInt(this.attackWins);
+        writer.writeInt(this.attackLoses);
 
-        writer.writeInt(0);
-        writer.writeInt(0);
+        writer.writeInt(this.defenseWins);
+        writer.writeInt(this.defenseLoses);
 
         writer.writeInt(0);
         writer.writeInt(0);
@@ -234,18 +240,20 @@ public class Player {
         writer.writeByte(0);
 
         writer.writeInt(6); //resource cap
-        writer.writeInt(3000000);
-        writer.writeInt(1000000);
-        writer.writeInt(3000001);
-        writer.writeInt(2000000000);
-        writer.writeInt(3000002);
-        writer.writeInt(2000000000);
-        writer.writeInt(3000003);
-        writer.writeInt(2000000000);
-        writer.writeInt(3000007);
-        writer.writeInt(2000000000);
-        writer.writeInt(3000008);
-        writer.writeInt(2000000000);
+        {
+            writer.writeInt(3000000);
+            writer.writeInt(1000000);
+            writer.writeInt(3000001);
+            writer.writeInt(2000000000);
+            writer.writeInt(3000002);
+            writer.writeInt(2000000000);
+            writer.writeInt(3000003);
+            writer.writeInt(2000000000);
+            writer.writeInt(3000007);
+            writer.writeInt(2000000000);
+            writer.writeInt(3000008);
+            writer.writeInt(2000000000);
+        }
 
         writer.writeInt(7); //resources array
         {
@@ -333,7 +341,7 @@ public class Player {
             writer.writeInt(3);
         }
 
-        writer.writeInt(11); spell levels
+        writer.writeInt(11); //spell levels
         {
             writer.writeInt(26000000); //lightning
             writer.writeInt(6);
@@ -389,7 +397,12 @@ public class Player {
             writer.writeInt(3);
         }
 
-        writer.writeInt(0);
+        writer.writeInt(1); //alliance units
+        {
+            writer.writeInt(4000006);
+            writer.writeInt(6);
+            writer.writeInt(7);
+        }
 
         int steps = this.nameSet == 0 ? 10 : 35;
         writer.writeInt(steps); //tutorial steps
@@ -398,8 +411,32 @@ public class Player {
                 writer.writeInt(21000000 + i);
         }
 
-        writer.writeInt(0);
-        writer.writeInt(0);
+       
+        writer.writeInt(7);
+        {
+            for (int i = 0; i < 7; i++) // achievement rewards
+            {
+                writer.writeInt(23000000 + i);
+            }
+        }
+
+        writer.writeInt(7); // achievement progress
+        {
+            writer.writeInt(23000000);
+            writer.writeInt(14);
+            writer.writeInt(23000001);
+            writer.writeInt(225);
+            writer.writeInt(23000002);
+            writer.writeInt(12);
+            writer.writeInt(23000003);
+            writer.writeInt(1000);
+            writer.writeInt(23000004);
+            writer.writeInt(3);
+            writer.writeInt(23000005);
+            writer.writeInt(2000000000);
+            writer.writeInt(23000006);
+            writer.writeInt(2000000000);
+        }
 
         writer.writeInt(94); //NPC completed levels
         for (int i = 17000000; i < 17000094; i++) {
