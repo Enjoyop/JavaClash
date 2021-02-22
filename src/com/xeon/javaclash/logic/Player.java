@@ -12,7 +12,7 @@ public class Player {
 
     public int id;
     public int gems = 100000;
-    public int gold = 500,
+    public int gold = 500;
     public int elixir = 500;
     public int darkelixir = 500;
     public int builderGold = 1000000000;
@@ -95,7 +95,7 @@ public class Player {
     public static void saveData() {
         try (DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("players.dat"))) {
             dataOutputStream.writeInt(players.size());
-            for (Player pleyer : players.values()) {
+            for (Player player : players.values()) {
                 dataOutputStream.writeInt(player.id);
                 dataOutputStream.writeUTF(player.name);
                 dataOutputStream.writeUTF(player.token);
